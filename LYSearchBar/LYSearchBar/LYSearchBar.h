@@ -10,6 +10,15 @@
 
 #define LYSearchBarDefaultHeight 60.0
 
+typedef NS_ENUM(NSInteger, LYBarStyle) {
+    /** 默认样式*/
+    LYBarStyleDefault = 0,
+    /** 系统 UISearchBar 默认样式*/
+    LYBarStyleSystem  = 1,
+    /** 边框样式*/
+    LYBarStyleBorder  = 2,
+};
+
 NS_ASSUME_NONNULL_BEGIN
 
 @class LYSearchBar;
@@ -65,6 +74,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, weak, nullable) id<LYSearchBarDelegate> delegate;
 @property(nonatomic, copy, nullable) NSString *text;
 @property(nonatomic, copy, nullable) NSString *placeholder;
+@property (nonatomic, assign) LYBarStyle barStyle;
 
 /**
  主要用来判断是否处于搜索状态

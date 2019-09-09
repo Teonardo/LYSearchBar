@@ -32,6 +32,8 @@ const CGFloat kFontSize = 16.0; // 文字大小
         self.backgroundColor = [UIColor whiteColor];
         
         [self layoutUI];
+        _barStyle = -1;
+        [self setBarStyle:LYBarStyleDefault];
     }
     return self;
 }
@@ -57,11 +59,6 @@ const CGFloat kFontSize = 16.0; // 文字大小
         imageView;
     });
     textField.leftViewMode = UITextFieldViewModeAlways;
-    
-    textField.layer.masksToBounds = YES;
-    textField.layer.cornerRadius = kTextFieldHeight/2.0;
-    textField.backgroundColor = [UIColor colorWithWhite:0.96 alpha:1.0];
-
     
     // cancelButton
     [self addSubview:self.cancelButton];
@@ -198,6 +195,11 @@ const CGFloat kFontSize = 16.0; // 文字大小
     return [self.cancelButton sizeThatFits:CGSizeMake(MAXFLOAT, kTextFieldHeight)].width;
 }
 
+- (void)setTextFieldRadius:(CGFloat)radius {
+    self.textField.layer.masksToBounds = YES;
+    self.textField.layer.cornerRadius = radius;
+}
+
 #pragma mark - Setter
 
 - (void)setText:(NSString *)text {
@@ -224,6 +226,42 @@ const CGFloat kFontSize = 16.0; // 文字大小
         if ([self.delegate respondsToSelector:@selector(updateSearchResultsForSearchBar:)]) {
             [self.delegate updateSearchResultsForSearchBar:self];
         }
+    }
+}
+
+- (void)setBarStyle:(LYBarStyle)barStyle {
+    if (_barStyle != barStyle) {
+        switch (barStyle) {
+            case LYBarStyleDefault:
+            {
+                [self setTextFieldRadius:kTextFieldHeight/2.0];
+                self.textField.backgroundColor = [UIColor colorWithWhite:0.96 alpha:1.0];
+                self.textField.layer.borderWidth = 0.0;
+                self.backgroundColor = [UIColor whiteColor];
+                break;
+            }
+            case LYBarStyleSystem:
+            {
+                [self setTextFieldRadius:kSpacing];
+                self.textField.backgroundColor = [UIColor whiteColor];
+                self.textField.layer.borderWidth = 0.0;
+                self.backgroundColor = [UIColor colorWithRed:200/255.f green:200/255.f blue:205/255.f alpha:1.0];
+                break;
+            }
+            case LYBarStyleBorder:
+            {
+                [self setTextFieldRadius:kTextFieldHeight/2.0];
+                self.textField.backgroundColor = [UIColor whiteColor];
+                self.textField.layer.borderColor = kCancelTextColor.CGColor;
+                self.textField.layer.borderWidth = 0.5;
+                self.backgroundColor = [UIColor whiteColor];
+                break;
+            }
+                
+            default:
+                break;
+        }
+        
     }
 }
 

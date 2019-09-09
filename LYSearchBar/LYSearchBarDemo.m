@@ -59,6 +59,11 @@
     tableView.frame = self.view.bounds;
 }
 
+#pragma mark - UITableViewDelegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    self.searchBar.barStyle = indexPath.row;
+}
+
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.searchBar.active ? self.searchResultArr.count : self.modelArr.count;
@@ -137,7 +142,7 @@
 
 - (NSMutableArray *)modelArr {
     if (!_modelArr) {
-        _modelArr = @[@"A", @"B", @"C", @"D", @"E", @"F", @"G", @"H", @"I", @"J", @"K", @"L", @"M", @"N", @"O", @"P", @"Q", @"R", @"S", @"T", @"U", @"V", @"W", @"X", @"Y", @"Z"].mutableCopy;
+        _modelArr = @[@"LYBarStyleDefault", @"LYBarStyleSystem", @"LYBarStyleBorder", @"A", @"B", @"C", @"D", @"E", @"F", @"G", @"H", @"I", @"J", @"K", @"L", @"M", @"N", @"O", @"P", @"Q", @"R", @"S", @"T", @"U", @"V", @"W", @"X", @"Y", @"Z"].mutableCopy;
     }
     return _modelArr;
 }
