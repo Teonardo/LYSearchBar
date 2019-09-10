@@ -262,6 +262,7 @@ const CGFloat kFontSize = 16.0; // 文字大小
                 break;
         }
         
+        _barStyle = barStyle;
     }
 }
 
